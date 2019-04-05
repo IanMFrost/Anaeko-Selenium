@@ -98,6 +98,7 @@ namespace SCTest
             string reasonError = "Could not locate element";
             string reasonPass = "Succes";
 
+            // if test fail show it with red text + reasonError in browserstack
             if(TestContext.CurrentContext.Result.Outcome.Status.Equals(TestStatus.Failed))
             {
                 string reqString = "{\"status\":\"error\", \"reason\":\"" + reasonError + "\"}";
@@ -130,6 +131,7 @@ namespace SCTest
 
                 myWebResponse.Close();
             }
+            // if test pass show it with green text + reasonPass on browserstack
             else if (TestContext.CurrentContext.Result.Outcome.Status.Equals(TestStatus.Passed))
             {
                 string reqString = "{\"status\":\"passed\", \"reason\":\"" + reasonPass + "\"}";

@@ -316,26 +316,30 @@ namespace SCTest.TestCases
             IWebElement name = driver.FindElementById("contact_name");
             name.SendKeys("Bob rickets");
 
-            //Inserts random Email
+            //Inserts random Email 
             wait.Until(ExpectedConditions.ElementExists(By.Id("email")));
-            driver.FindElementById("email").SendKeys("bobrickets@af.com");
+            // insert a new value every time this test has been run otherwise it would try to register with an already existing email
+            driver.FindElementById("email").SendKeys("bobrickets@vf.com");
 
+            // checks the policy box
             driver.FindElementByName("policy").Click();
             driver.FindElementById("submitBtn").Click();
 
+            // enters an valid URL 
             wait.Until(ExpectedConditions.ElementExists(By.Id("jira")));
             driver.FindElementById("jira").SendKeys("issues.jboss.org");
 
             
             driver.FindElementById("submitBtn").Click();
             driver.FindElementById("submitBtn").Click();
-
+            // enter submit button 
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@id='submitBtn']")));
             driver.FindElementByName("Submit").Click();
-
+            // logs out from the application to check if login page appear
             wait.Until(ExpectedConditions.ElementToBeClickable(By.LinkText("Logout")));
             driver.FindElement(By.LinkText("Logout")).Click();
 
+            // looks after if password input field appears on the login page
             IWebElement loginpassword = driver.FindElementByName("login.user.password");
             bool IsLoginDisplayed =  loginpassword.Displayed;
             Assert.AreEqual(true, IsLoginDisplayed);
@@ -442,6 +446,7 @@ namespace SCTest.TestCases
             // clicks on publish report button
             driver.FindElementById("save").Click();
 
+            // waits for the dialog box present an confirmation with it has been published
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("ui-pnotify-icon")));
             IWebElement Dialogbox = driver.FindElement(By.ClassName("ui-pnotify-icon"));
             bool IsPresent = Dialogbox.Displayed;
